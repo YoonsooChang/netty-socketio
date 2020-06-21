@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class CancelableScheduler {
 
     protected final ConcurrentMap<SchedulerKey, Timeout> scheduledFutures = PlatformDependent.newConcurrentHashMap();
+    
     protected final HashedWheelTimer executorService;
 
     protected volatile ChannelHandlerContext ctx;
@@ -61,7 +62,7 @@ public abstract class CancelableScheduler {
     }
 
 
-    public void schedule(SchedulerKey key, Runnable runnable, long delay, TimeUnit unit) {
+    public void schedule(final SchedulerKey key, final Runnable runnable, long delay, TimeUnit unit) {
         Timeout timeout = executorService.newTimeout(new TimerTask() {
             @Override
             public void run(Timeout timeout) throws Exception {
@@ -76,7 +77,7 @@ public abstract class CancelableScheduler {
         scheduledFuture(key, timeout);
     }
 
-    public void scheduleCallback(SchedulerKey key, Runnable runnable, long delay, TimeUnit unit) {
+    public void scheduleCallback(final SchedulerKey key, final Runnable runnable, long delay, TimeUnit unit) {
         Timeout timeout = executorService.newTimeout(new TimerTask() {
             @Override
             public void run(Timeout timeout) throws Exception {

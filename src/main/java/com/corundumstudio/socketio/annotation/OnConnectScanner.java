@@ -33,7 +33,7 @@ public class OnConnectScanner implements AnnotationScanner  {
 
     @Override
     public void addListener(Namespace namespace, final Object object, final Method method, Annotation annotation) {
-        namespace.addConnectListener(new ConnectListener() {
+        namespace.getListenerManager().addConnectListener(new ConnectListener() {
             @Override
             public void onConnect(SocketIOClient client) {
                 try {

@@ -63,10 +63,10 @@ public class RedissonPubSubStore implements PubSubStore {
             }
         });
 
-        Queue<Integer> list = map.get(name);
+        Queue<Integer> list = map.get(typeName);
         if (list == null) {
             list = new ConcurrentLinkedQueue<Integer>();
-            Queue<Integer> oldList = map.putIfAbsent(name, list);
+            Queue<Integer> oldList = map.putIfAbsent(typeName, list);
             if (oldList != null) {
                 list = oldList;
             }

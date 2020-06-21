@@ -33,7 +33,7 @@ public class OnDisconnectScanner implements AnnotationScanner {
 
     @Override
     public void addListener(Namespace namespace, final Object object, final Method method, Annotation annotation) {
-        namespace.addDisconnectListener(new DisconnectListener() {
+        namespace.getListenerManager().addDisconnectListener(new DisconnectListener() {
             @Override
             public void onDisconnect(SocketIOClient client) {
                 try {

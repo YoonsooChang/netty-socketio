@@ -54,7 +54,7 @@ public class OnEventScanner implements AnnotationScanner {
                 classes.add(param);
             }
 
-            namespace.addMultiTypeEventListener(annotation.value(), new MultiTypeEventListener() {
+            namespace.getListenerManager().addMultiTypeEventListener(annotation.value(), new MultiTypeEventListener() {
                 @Override
                 public void onData(SocketIOClient client, MultiTypeArgs data, AckRequest ackSender) {
                     try {
@@ -84,7 +84,7 @@ public class OnEventScanner implements AnnotationScanner {
                 objectType = method.getParameterTypes()[dataIndexes.iterator().next()];
             }
 
-            namespace.addEventListener(annotation.value(), objectType, new DataListener<Object>() {
+            namespace.getListenerManager().addEventListener(annotation.value(), objectType, new DataListener<Object>() {
                 @Override
                 public void onData(SocketIOClient client, Object data, AckRequest ackSender) {
                     try {
